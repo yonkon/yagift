@@ -1,0 +1,58 @@
+html {
+    background: white;
+}
+
+/*//////////////HELPERS////////////*/
+.block {
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+/*////////////IDS////////////////*/
+#filters {
+    border: 1px solid #2080D0;
+    border-radius: 8px;
+    background: none repeat scroll 0% 0% #E8FAFF;
+    width: 556px;
+}
+
+#filter-content {
+    padding: 16px 12px;
+}
+
+
+
+.filter-group > * {
+    width: 50%;
+    display: inline-block;
+}
+
+.filter-group label {
+    width: 35%;
+    margin: 0 2%;
+}
+
+.gift_div {
+    width: 20%;
+    padding: 2%;
+    float: left;
+}
+
+.gift_div:nth-of-type(4n) {
+    clear: left;
+}

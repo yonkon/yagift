@@ -4,7 +4,6 @@ body
 	padding: 0;
 	color: #555;
 	font: normal 10pt Arial,Helvetica,sans-serif;
-	background: #EFEFEF;
 }
 
 #page
@@ -12,14 +11,13 @@ body
 	margin-top: 5px;
 	margin-bottom: 5px;
 	background: white;
-	border: 1px solid #C9E0ED;
 }
 
 #header
 {
 	margin: 0;
 	padding: 0;
-	border-top: 3px solid #C9E0ED;
+	/*border-top: 3px solid #C9E0ED;*/
 }
 
 #content
@@ -38,7 +36,7 @@ body
 	margin: 10px 20px;
 	font-size: 0.8em;
 	text-align: center;
-	border-top: 1px solid #C9E0ED;
+	/*border-top: 1px solid #C9E0ED;*/
 }
 
 #logo
@@ -49,7 +47,9 @@ body
 
 #mainmenu
 {
-	background:white url(bg.gif) repeat-x left top;
+	/*background:white url(bg.gif) repeat-x left top;*/
+	background:white;
+    clear: both;
 }
 
 #mainmenu ul
@@ -60,12 +60,12 @@ body
 
 #mainmenu ul li
 {
-	display: inline;
+	display: inline-block;
 }
 
 #mainmenu ul li a
 {
-	color:#ffffff;
+	color: grey;
 	background-color:transparent;
 	font-size:12px;
 	font-weight:bold;
@@ -75,8 +75,8 @@ body
 
 #mainmenu ul li a:hover, #mainmenu ul li.active a
 {
-	color: #6399cd;
-	background-color:#EFF4FA;
+	color: #ddd;
+	/*background-color:#EFF4FA;*/
 	text-decoration:none;
 }
 

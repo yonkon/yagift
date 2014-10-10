@@ -199,9 +199,6 @@ class ParsingResults extends CActiveRecord
 		return parent::model($className);
 	}
 
-    public static function selectProductsWithoutFilters(){
-        $products = ParsingResults::model()->findAllBySql('SELECT * FROM ' . ParsingResults::model()->tableName() . " WHERE `day`='' AND `gender`='' AND `for`='' AND `age`='' AND `Original`=0 AND `Romantic`=0 AND `Useful`=0 AND `ForSoul`=0 AND `Funny`=0 AND `Chic`=0 AND `Smart`=0 AND `Miracle`=0 AND `Technology`='' AND `Souvenir`='' AND `Rest`='' AND `Game`='' AND `ForHome`='' AND `ForOffice`='' AND `ForGarden`='' AND `Repair`='' AND `Hobby`='' AND `Developmental`='' AND `ForAuto`='' AND `ForSport`='' AND `Beauty`='' AND `Holiday`='' AND `Animate`='' AND `Tasty`='' AND `Music`='' GROUP BY `name` ORDER BY `p`");
-        return $products;
-    }
+    
 
 }

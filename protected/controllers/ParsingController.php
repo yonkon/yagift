@@ -4,8 +4,22 @@ class ParsingController extends Controller
 {
 	public function actionIndex()
 	{
+//        $fromParsingResults = Product::fromParsingResults();
 		$this->render('index');
 	}
+
+    public function actionSet_list_numbers() {
+        $parsed_products = ParsingResults::selectProductsWithoutFilters();
+        $listNum = 1;
+        foreach($parsed_products as $pp) {
+            /**
+             * @var $product Product
+             */
+            $product = Product::model()->findByAttributes(array('name' => $pp['name']) );
+            $product->ListNumber = $listNum++;
+            $product->save();
+        }
+    }
 
 	// Uncomment the following methods and override them if needed
 	/*

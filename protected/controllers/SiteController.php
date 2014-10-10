@@ -32,6 +32,26 @@ class SiteController extends Controller
 		$this->render('index');
 	}
 
+	public function actionList()
+	{
+        $processedFilter = ProductValues::processFilter($_REQUEST);
+        $criteria = ProductValues::getFilterCriteria($processedFilter);
+//        $criteria = new CDbCriteria();
+        $criteria->order = 'ListNumber ASC';
+        $count=Product::model()->count($criteria);
+        $pages=new CPagination($count);
+// элементов на страницу
+        $pages->pageSize=20;
+        $pages->applyLimit($criteria);
+
+        $products = Product::model()->findAll($criteria);
+		// renders the view file 'protected/views/site/index.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('list', array('pages' => $pages, 'products' => $products));
+	}
+
+
+
 	/**
 	 * This is the action to handle external exceptions.
 	 */

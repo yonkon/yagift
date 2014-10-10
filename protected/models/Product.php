@@ -4,41 +4,15 @@
  * This is the model class for table "product".
  *
  * The followings are the available columns in table 'product':
- * @property integer $id
+ * @property integer $product_id
  * @property string $name
  * @property string $price
  * @property string $image
- * @property string $day
- * @property string $gender
- * @property string $for
- * @property string $age
- * @property integer $Original
- * @property integer $Romantic
- * @property integer $Useful
- * @property integer $ForSoul
- * @property integer $Funny
- * @property integer $Chic
- * @property integer $Smart
- * @property integer $Miracle
- * @property integer $Technology
- * @property integer $Souvenir
- * @property integer $Rest
- * @property integer $Game
- * @property integer $ForHome
- * @property integer $ForOffice
- * @property integer $ForGarden
- * @property integer $Repair
- * @property integer $Hobby
- * @property integer $Developmental
- * @property integer $ForAuto
- * @property integer $ForSport
- * @property integer $Beauty
- * @property integer $Holiday
- * @property integer $Animate
- * @property integer $Tasty
- * @property integer $Music
  * @property integer $ListNumber
  * @property string $url
+ *
+ * The followings are the available model relations:
+ * @property ProductValues[] $productValues
  */
 class Product extends CActiveRecord
 {
@@ -58,15 +32,14 @@ class Product extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, name, image, day, gender, for, age, Original, Romantic, Useful, ForSoul, Funny, Chic, Smart, Miracle, Technology, Souvenir, Rest, Game, ForHome, ForOffice, ForGarden, Repair, Hobby, Developmental, ForAuto, ForSport, Beauty, Holiday, Animate, Tasty, Music, url', 'required'),
-			array('id, Original, Romantic, Useful, ForSoul, Funny, Chic, Smart, Miracle, Technology, Souvenir, Rest, Game, ForHome, ForOffice, ForGarden, Repair, Hobby, Developmental, ForAuto, ForSport, Beauty, Holiday, Animate, Tasty, Music, ListNumber', 'numerical', 'integerOnly'=>true),
+			array('name, image', 'required'),
+			array('ListNumber', 'numerical', 'integerOnly'=>true),
 			array('name, url', 'length', 'max'=>256),
 			array('price', 'length', 'max'=>16),
 			array('image', 'length', 'max'=>512),
-			array('day, gender, for, age', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, price, image, day, gender, for, age, Original, Romantic, Useful, ForSoul, Funny, Chic, Smart, Miracle, Technology, Souvenir, Rest, Game, ForHome, ForOffice, ForGarden, Repair, Hobby, Developmental, ForAuto, ForSport, Beauty, Holiday, Animate, Tasty, Music, ListNumber, url', 'safe', 'on'=>'search'),
+			array('product_id, name, price, image, ListNumber', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -78,6 +51,7 @@ class Product extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'productValues' => array(self::HAS_MANY, 'ProductValues', 'product_id'),
 		);
 	}
 
@@ -87,39 +61,10 @@ class Product extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
+			'product_id' => 'Product',
 			'name' => 'Name',
 			'price' => 'Price',
 			'image' => 'Image',
-			'day' => 'Day',
-			'gender' => 'Gender',
-			'for' => 'For',
-			'age' => 'Age',
-			'Original' => 'Original',
-			'Romantic' => 'Romantic',
-			'Useful' => 'Useful',
-			'ForSoul' => 'For Soul',
-			'Funny' => 'Funny',
-			'Chic' => 'Chic',
-			'Smart' => 'Smart',
-			'Miracle' => 'Miracle',
-			'Technology' => 'Technology',
-			'Souvenir' => 'Souvenir',
-			'Rest' => 'Rest',
-			'Game' => 'Game',
-			'ForHome' => 'For Home',
-			'ForOffice' => 'For Office',
-			'ForGarden' => 'For Garden',
-			'Repair' => 'Repair',
-			'Hobby' => 'Hobby',
-			'Developmental' => 'Developmental',
-			'ForAuto' => 'For Auto',
-			'ForSport' => 'For Sport',
-			'Beauty' => 'Beauty',
-			'Holiday' => 'Holiday',
-			'Animate' => 'Animate',
-			'Tasty' => 'Tasty',
-			'Music' => 'Music',
 			'ListNumber' => 'List Number',
 			'url' => 'Url',
 		);
@@ -143,45 +88,23 @@ class Product extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('product_id',$this->product_id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('price',$this->price,true);
 		$criteria->compare('image',$this->image,true);
-		$criteria->compare('day',$this->day,true);
-		$criteria->compare('gender',$this->gender,true);
-		$criteria->compare('for',$this->for,true);
-		$criteria->compare('age',$this->age,true);
-		$criteria->compare('Original',$this->Original);
-		$criteria->compare('Romantic',$this->Romantic);
-		$criteria->compare('Useful',$this->Useful);
-		$criteria->compare('ForSoul',$this->ForSoul);
-		$criteria->compare('Funny',$this->Funny);
-		$criteria->compare('Chic',$this->Chic);
-		$criteria->compare('Smart',$this->Smart);
-		$criteria->compare('Miracle',$this->Miracle);
-		$criteria->compare('Technology',$this->Technology);
-		$criteria->compare('Souvenir',$this->Souvenir);
-		$criteria->compare('Rest',$this->Rest);
-		$criteria->compare('Game',$this->Game);
-		$criteria->compare('ForHome',$this->ForHome);
-		$criteria->compare('ForOffice',$this->ForOffice);
-		$criteria->compare('ForGarden',$this->ForGarden);
-		$criteria->compare('Repair',$this->Repair);
-		$criteria->compare('Hobby',$this->Hobby);
-		$criteria->compare('Developmental',$this->Developmental);
-		$criteria->compare('ForAuto',$this->ForAuto);
-		$criteria->compare('ForSport',$this->ForSport);
-		$criteria->compare('Beauty',$this->Beauty);
-		$criteria->compare('Holiday',$this->Holiday);
-		$criteria->compare('Animate',$this->Animate);
-		$criteria->compare('Tasty',$this->Tasty);
-		$criteria->compare('Music',$this->Music);
 		$criteria->compare('ListNumber',$this->ListNumber);
 		$criteria->compare('url',$this->url,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
+                'criteria'=>$criteria,
+                'pagination'=>array(
+                    'pageSize'=>self::$defaults['page_size'],
+                ),
+                'sort' => array (
+                    'defaultOrder' => 'ListNumber ASC'
+                )
+            )
+        );
 	}
 
 	/**
@@ -195,75 +118,84 @@ class Product extends CActiveRecord
 		return parent::model($className);
 	}
 
+    /* CUSTOM LOGIC */
     /**
-    * @var ParsingResults[] $products - Products without params
+     * @var ParsingResults[] $products - Products without params
      * @return array|bool Return true if all products imported, array of skipped products otherwise
      */
     public static function fromParsingResults() {
-        $products = ParsingResults::model()->findAllBySql('SELECT * FROM ' . ParsingResults::model()->tableName() . " WHERE `day`='' AND `gender`='' AND `for`='' AND `age`='' AND `Original`=0 AND `Romantic`=0 AND `Useful`=0 AND `ForSoul`=0 AND `Funny`=0 AND `Chic`=0 AND `Smart`=0 AND `Miracle`=0 AND `Technology`='' AND `Souvenir`='' AND `Rest`='' AND `Game`='' AND `ForHome`='' AND `ForOffice`='' AND `ForGarden`='' AND `Repair`='' AND `Hobby`='' AND `Developmental`='' AND `ForAuto`='' AND `ForSport`='' AND `Beauty`='' AND `Holiday`='' AND `Animate`='' AND `Tasty`='' AND `Music`='' GROUP BY `name` ");
+        $products = ParsingResults::selectProductsWithoutFilters();
         $skippedResults = array();
+        $listNumber = 1;
         foreach ($products as $product) {
-            $newProduct = Product::formParsingResult($product);
+            $newProduct = Product::formParsingResult($product, null, $listNumber++);
             if (!$newProduct) {
                 $skippedResults[] = $product;
                 continue;
             }
-            $allProductRowsInParsingResults = ParsingResults::model()->findAllByAttributes(array('name' => $newProduct));
-            foreach($allProductRowsInParsingResults as $pr_row) {
-                foreach(Product::$integerFields as $int_f) {
-                    if($newProduct->$int_f < $pr_row->$int_f) {
-                        $newProduct->$int_f = $pr_row->$int_f;
-                    }
-                }
-                foreach(Product::$booleanFields as $bool_f) {
-                    if($pr_row->$bool_f == 'on') {
-                        $newProduct->$bool_f = true;
-                    }
-                }
-            }
+
+            ProductValues::updateFromParsingResults($newProduct);
         }
         return (empty($skippedResults)? true : $skippedResults);
     }
 
-    public static function formParsingResult(ParsingResults $parsingResult) {
-        $newProduct = new Product();
-        $newProduct->setAttributes($parsingResult, false);
+    /**
+     * @param ParsingResults $parsingResult
+     * @param null $product_id
+     * @return bool|null|Product
+     */
+    public static function formParsingResult(ParsingResults $parsingResult, $product_id = null, $listNumber = null) {
+        if($product_id == null) {
+            $newProduct = new Product();
+        } else {
+            $newProduct = self::model()->findByPk($product_id);
+            if(empty ($newProduct)) {
+                $newProduct = new Product();
+                $newProduct->product_id = $product_id;
+            }
+        }
+        if($listNumber)
+            $newProduct->ListNumber = $listNumber;
+        $parsingResultAttributes = $parsingResult->getAttributes();
+        $newProduct->setAttributes($parsingResultAttributes , false);
         if($newProduct->validate()) {
+            $newProduct->save();
+            foreach ($parsingResultAttributes as $attr => $val) {
+                $newProduct->setParam($attr, $val);
+            }
             return $newProduct;
         }
         return false;
     }
-    
-    public static $integerFields = array(
-        'Original',
-        'Romantic', 
-        'Useful', 
-        'ForSoul', 
-        'Funny', 
-        'Chic', 
-        'Smart', 
-        'Miracle',
+
+    public function setParam($name, $value, $additional = null) {
+        if(in_array($name, ProductValues::$selectFields) ) {
+            if(empty($value)) {
+                return true;
+            }
+            $name = "{$name}[{$value}]";
+            if($additional == null) {
+                $value = 'on';
+            } else {
+                $value = $additional;
+            }
+        }
+        $product_param = ProductParams::model()->findByAttributes(array('param_name' => $name));
+        if(empty($product_param)) {
+            return false;
+        }
+        $pv = ProductValues::model()->findByAttributes(array('product_id' => $this->product_id, 'product_params_id' => $product_param['product_params_id']));
+        if(empty($pv)) {
+            $pv = new ProductValues();
+        }
+        $pv->product_id = $this->product_id;
+        $pv->product_params_id = $product_param['product_params_id'];
+        $pv->value = $value;
+        return ($pv->validate() && $pv->save());
+    }
+
+
+    public static $defaults = array (
+        'page_size' => 20
     );
-
-    public static $booleanFields = array(
-        'Technology',
-        'Souvenir',
-        'Rest',
-        'Game',
-        'ForHome',
-        'ForOffice',
-        'ForGarden',
-        'Repair',
-        'Hobby',
-        'Developmental',
-        'ForAuto',
-        'ForSport',
-        'Beauty',
-        'Holiday',
-        'Animate',
-        'Tasty',
-        'Music'
-    );
-
-
 }
