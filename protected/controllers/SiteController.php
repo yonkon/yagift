@@ -36,7 +36,14 @@ class SiteController extends Controller
 	{
         $processedFilter = ProductValues::processFilter($_REQUEST);
         $criteria = ProductValues::getFilterCriteria($processedFilter);
-//        $criteria = new CDbCriteria();
+        if(!empty($_REQUEST['PriceMin']) ) {
+            $pmin = preg_replace('/[^\d]/', '', $_REQUEST['PriceMin']);
+            $criteria->addCondition('price >= ' . $pmin );
+        }
+        if(!empty($_REQUEST['PriceMax']) ) {
+            $pmax = preg_replace('/[^\d]/', '', $_REQUEST['PriceMax']);
+            $criteria->addCondition('price <= ' . $pmax );
+        }
         $criteria->order = 'ListNumber ASC';
         $count=Product::model()->count($criteria);
         $pages=new CPagination($count);
@@ -49,8 +56,6 @@ class SiteController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('list', array('pages' => $pages, 'products' => $products));
 	}
-
-
 
 	/**
 	 * This is the action to handle external exceptions.
@@ -126,4 +131,40 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+
+    public function actionImage_rewrite($id = null) {
+        if(empty ($id)) {
+            $products = Product::model()->findAllBySql('SELECT * from ' . Product::tableName() . ' WHERE image NOT LIKE "%' . Yii::app()->createAbsoluteUrl(Yii::app()->getHomeUrl()) . '%" ');
+            /**
+             * @var $product Product
+             */
+            foreach($products as $product) {
+                $image_url = preg_replace('/size=\d/', 'size=6', $product->image);
+                $image_bin = Helpers::getContentUrl($image_url);
+                $dirimg = realpath(Yii::app()->basePath . '/../images') . '/' . $product->product_id. '/'; // directory in which the image will be saved
+                $filename = preg_replace('/.*path=(.*)&.*/', '$1', $image_url);
+                $image_new_url = Yii::app()->createAbsoluteUrl('images/' . $product->product_id. '/' . $filename);
+                if(!is_dir($dirimg)) {
+                    mkdir($dirimg);
+                    chmod($dirimg, 0777);
+                }
+                $localfile = $dirimg . $filename;
+                file_put_contents($localfile, $image_bin);
+                if (is_file($localfile) && filesize($localfile)) {
+                    $product->image = $image_new_url;
+                    $product->save();
+                    $minified = new SimpleImage();
+                    $minified->load($localfile);
+                    $minified->resizeToHeight(100);
+                    $minified->save(preg_replace('/(.*)\.(.*)/', '$1.min.$2', $localfile));
+                }
+//                $img_resource =  curl_init($image_url);
+//
+//                curl_close($img_resource);
+            }
+
+        }
+    }
+
+
 }

@@ -1,0 +1,144 @@
+<?php
+/**
+ * @var $app CApplication
+ */
+$filterGroups = ProductParams::getFiltersGroups();
+$pps = ProductParams::model()->findAll();
+
+
+?>
+<form enctype="multipart/form-data" action="<?php echo(Yii::app()->createUrl('site/list')); ?>">
+    <div id="filters" class="center">
+        <div id="filter-content">
+<div class="w100">
+<!--    <div id="filters" class="center">-->
+<!--        <div id="filter-content">-->
+    <div class="float-l w40">
+        <label for="day">
+            <?php echo Yii::t('filter', $filterGroups['day']['label']); ?>
+        </label>
+        <div class="clr">&nbsp;</div>
+        <select id="day" name="day">
+            <?php
+            foreach($filterGroups['day']['elements'] as $f) {
+            ?>
+                <option value="<?php echo $f['value'] ;?>">
+                    <?php echo Yii::t('filter', $f['label']); ?>
+                </option>
+            <?php
+            }
+            ?>
+        </select>
+    </div>
+    <div class="float-r w55">
+        <label for="price">
+            <?php echo Yii::t('filter', 'Price'); ?>
+        </label>
+        <input type="hidden" name="PriceMin">
+        <input type="hidden" name="PriceMax">
+        <input id="price-slider" type="range">
+    </div>
+    <div class="clr">&nbsp;</div>
+    <div class="float-l w40">
+        <label for="for">
+            <?php echo Yii::t('filter', 'For'); ?>
+        </label>
+        <input id="gender" type="hidden" name="gender">
+        <div>
+            <button class="gender-button" type="button" name="gender[ForMan]">
+                <?php echo Yii::t('filter', 'For man'); ?>
+            </button>
+            <button class="gender-button" type="button" name="gender[ForWoman]">
+                <?php echo Yii::t('filter', 'For woman'); ?>
+            </button>
+        </div>
+    </div>
+    <div class="float-r w55">
+                <label for="category">
+                    <?php echo Yii::t('filter', 'Category'); ?>
+                </label>
+                <div class="two-column-filter">
+                    <?php
+                    foreach($filterGroups['category']['elements'] as $f) {
+                        ?>
+                        <div class="w50">
+                        <input id="<?php echo $f['name']; ?>"
+                               type="checkbox"
+                               name="<?php echo $f['name']; ?>"
+                               value="on">
+                        <label for="<?php echo $f['name']; ?>"><?php echo $f['label']; ?>
+                        </label>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
+    <div class="float-l w40">
+                <div class="two-column-filter">
+                    <?php
+                    foreach($filterGroups['for']['elements'] as $f) {
+                        ?>
+                        <div class="w50">
+                            <input id="<?php echo $f['name']; ?>"
+                               type="radio"
+                               name="for"
+                               value="on">
+                            <label for="<?php echo $f['name']; ?>">
+                                <?php echo $f['label']; ?>
+                            </label>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
+    <div class="float-l w40">
+        <label for="day">
+            <?php echo Yii::t('filter', $filterGroups['age']['label']); ?>
+        </label>
+        <div class="clr">&nbsp;</div>
+        <select id="day" name="day">
+            <?php
+            foreach($filterGroups['age']['elements'] as $f) {
+                ?>
+                <option value="<?php echo $f['value'] ;?>">
+                    <?php echo Yii::t('filter', $f['label']); ?>
+                </option>
+            <?php
+            }
+            ?>
+        </select>
+    </div>
+    <div class="clr">&nbsp;</div>
+    <div class="w100">
+        <div class="w50 float-l">
+            <label for="Original">
+                <?php echo Yii::t('filter' , $filterGroups['Original']['label']);?>
+            </label>
+            <div class="clr">&nbsp;</div>
+            <div class="w90">
+                <input type="number" id="Original" name="Original">
+            </div>
+        </div>
+        <div class="w50 float-l">
+            <label for="Romantic">
+                <?php echo Yii::t('filter' , $filterGroups['Romantic']['label']);?>
+            </label>
+            <div class="clr">&nbsp;</div>
+            <div class="w90">
+                <input type="number" id="Romantic" name="Romantic">
+            </div>
+        </div>
+    </div>
+    <?php
+//        echo ProductParams::getFiltersHTML();
+        ?>
+<!--        </div>-->
+<!--    </div>-->
+</div>
+            <div class="clr">&nbsp;</div>
+            <input type="submit" name="submit" value="submit">
+        </div>
+    </div>
+</form>

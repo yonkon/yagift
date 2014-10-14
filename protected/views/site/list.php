@@ -6,5 +6,14 @@
  */
 
 $this->pageTitle=Yii::app()->name;
-$this->renderPartial('filter');
-$this->renderPartial('gift_list', array('products' => $products, 'pages' => $pages));
+?>
+<div class="w60 float-l">
+    <?php
+    $this->renderPartial('gift_list', array('products' => $products, 'pages' => $pages));
+    ?>
+</div>
+<div class="w40 float-l">
+    <?php
+    $this->renderPartial('filter_side');
+    ?>
+</div>
