@@ -9,6 +9,7 @@
  * @property string $price
  * @property string $image
  * @property integer $ListNumber
+ * @property integer $status
  * @property string $url
  *
  * The followings are the available model relations:
@@ -16,7 +17,17 @@
  */
 class Product extends CActiveRecord
 {
-	/**
+    public static $defaults = array (
+        'page_size' => 20
+    );
+
+    public static $statuses = array (
+        'disabled'  => 0,
+        'enabled'   => 1,
+    );
+
+
+    /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -37,9 +48,10 @@ class Product extends CActiveRecord
 			array('name, url', 'length', 'max'=>256),
 			array('price', 'length', 'max'=>16),
 			array('image', 'length', 'max'=>512),
+			array('status', 'length', 'max'=>2),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('product_id, name, price, image, ListNumber', 'safe', 'on'=>'search'),
+			array('product_id, name, price, image, ListNumber, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +79,7 @@ class Product extends CActiveRecord
 			'image' => 'Image',
 			'ListNumber' => 'List Number',
 			'url' => 'Url',
+			'status' => 'Status',
 		);
 	}
 
@@ -91,6 +104,7 @@ class Product extends CActiveRecord
 		$criteria->compare('product_id',$this->product_id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('price',$this->price,true);
+		$criteria->compare('price',$this->status,true);
 		$criteria->compare('image',$this->image,true);
 		$criteria->compare('ListNumber',$this->ListNumber);
 		$criteria->compare('url',$this->url,true);
@@ -194,8 +208,45 @@ class Product extends CActiveRecord
         return ($pv->validate() && $pv->save());
     }
 
+    public function hasLocalImage() {
+        return (strpos($this->image, Yii::app()->createAbsoluteUrl(Yii::app()->getHomeUrl()) )  !== false);
+    }
 
-    public static $defaults = array (
-        'page_size' => 20
-    );
+    public function makeLocalImage() {
+        $image_url = preg_replace('/size=\d/', 'size=6', $this->image);
+        $image_bin = Helpers::getContentUrl($image_url);
+        $dirimg = realpath(Yii::app()->basePath . '/../images') . '/' . $this->product_id. '/'; // directory in which the image will be saved
+        $filename = preg_replace('/.*path=(.*)&.*/', '$1', $image_url);
+        $image_new_url = Yii::app()->createAbsoluteUrl('images/' . $this->product_id. '/' . $filename);
+        if(!is_dir($dirimg)) {
+            mkdir($dirimg);
+            chmod($dirimg, 0777);
+        }
+        $localfile = $dirimg . $filename;
+        file_put_contents($localfile, $image_bin);
+        if (is_file($localfile) && filesize($localfile)) {
+            $this->image = $image_new_url;
+            $this->save();
+            $minified = new SimpleImage();
+            $minified->load($localfile);
+            $minified->resizeToHeight(100);
+            $minified->save(preg_replace('/(.*)\.(.*)/', '$1.min.$2', $localfile));
+            return $this;
+        }
+        return false;
+    }
+
+    public function getImage_min() {
+        if(!$this->hasLocalImage()) {
+            if (!$this->makeLocalImage() ) {
+                return $this->image;
+            }
+        }
+        return preg_replace('/(.*)\.(.*)/', '$1.min.$2', $this->image);
+    }
+
+    public function isEnabled() {
+        return ($this->status == 1);
+    }
+
 }

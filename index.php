@@ -25,6 +25,7 @@ if(YII_DEBUG) {
 }
 
 //$app->clientScript->registerCssFile('/js/ion.RangeSlider/css/normalize.min.css', CClientScript::POS_HEAD );
+$app->clientScript->registerScriptFile('/js/ajax_get.js', CClientScript::POS_END );
 $app->clientScript->registerScriptFile('/js/filter.js', CClientScript::POS_END );
 $app->language = 'ru';
 

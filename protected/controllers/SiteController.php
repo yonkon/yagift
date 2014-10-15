@@ -139,25 +139,28 @@ class SiteController extends Controller
              * @var $product Product
              */
             foreach($products as $product) {
-                $image_url = preg_replace('/size=\d/', 'size=6', $product->image);
-                $image_bin = Helpers::getContentUrl($image_url);
-                $dirimg = realpath(Yii::app()->basePath . '/../images') . '/' . $product->product_id. '/'; // directory in which the image will be saved
-                $filename = preg_replace('/.*path=(.*)&.*/', '$1', $image_url);
-                $image_new_url = Yii::app()->createAbsoluteUrl('images/' . $product->product_id. '/' . $filename);
-                if(!is_dir($dirimg)) {
-                    mkdir($dirimg);
-                    chmod($dirimg, 0777);
+                if(!$product->hasLocalImage()) {
+                    $product->makeLocalImage();
                 }
-                $localfile = $dirimg . $filename;
-                file_put_contents($localfile, $image_bin);
-                if (is_file($localfile) && filesize($localfile)) {
-                    $product->image = $image_new_url;
-                    $product->save();
-                    $minified = new SimpleImage();
-                    $minified->load($localfile);
-                    $minified->resizeToHeight(100);
-                    $minified->save(preg_replace('/(.*)\.(.*)/', '$1.min.$2', $localfile));
-                }
+//                $image_url = preg_replace('/size=\d/', 'size=6', $product->image);
+//                $image_bin = Helpers::getContentUrl($image_url);
+//                $dirimg = realpath(Yii::app()->basePath . '/../images') . '/' . $product->product_id. '/'; // directory in which the image will be saved
+//                $filename = preg_replace('/.*path=(.*)&.*/', '$1', $image_url);
+//                $image_new_url = Yii::app()->createAbsoluteUrl('images/' . $product->product_id. '/' . $filename);
+//                if(!is_dir($dirimg)) {
+//                    mkdir($dirimg);
+//                    chmod($dirimg, 0777);
+//                }
+//                $localfile = $dirimg . $filename;
+//                file_put_contents($localfile, $image_bin);
+//                if (is_file($localfile) && filesize($localfile)) {
+//                    $product->image = $image_new_url;
+//                    $product->save();
+//                    $minified = new SimpleImage();
+//                    $minified->load($localfile);
+//                    $minified->resizeToHeight(100);
+//                    $minified->save(preg_replace('/(.*)\.(.*)/', '$1.min.$2', $localfile));
+//                }
 //                $img_resource =  curl_init($image_url);
 //
 //                curl_close($img_resource);
