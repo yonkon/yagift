@@ -4,7 +4,13 @@
  */
 $app = Yii::app();
 if ($app->user->isGuest) {
-    $app->request->redirect($app->createUrl('/site/login'));
+    $app->request->redirect($app->createUrl(
+            '/site/login',
+            array(
+                'returnUrl'=> $app->request->getUrl()
+            )
+        )
+    );
 }
 
 $app->clientScript->registerCssFile('../css/admin.css');
@@ -24,7 +30,7 @@ class AdminController extends Controller
             $pmax = preg_replace('/[^\d]/', '', $_REQUEST['PriceMax']);
             $criteria->addCondition('price <= ' . $pmax );
         }
-        $criteria->order = 'ListNumber ASC';
+        $criteria->order = 'url ASC, ListNumber ASC';
         $count=Product::model()->count($criteria);
         $pages=new CPagination($count);
 // элементов на страницу
