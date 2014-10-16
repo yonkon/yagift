@@ -13,6 +13,19 @@ $(document).ready(function(){
            changeProduct(id, attr, val);
        });
    });
+    $('table.gift-list .gift_actions button').each(function(i, el) {
+        var $el = $(el);
+        $el.click(function() {
+            var action = $el.data('action');
+            var id = $el.parent().parent().data('id');
+//            var attr = 'status';
+            if (action == 'enable') {
+                enableProduct(id, $el);
+            } else if (action == 'disable') {
+                disableProduct(id, $el)
+            }
+        });
+    });
 });
 
 function changeProduct(id, attr, val) {
@@ -40,6 +53,8 @@ function changeProduct(id, attr, val) {
             ajax_remove_shadow();
         }
     );
+
+
 //    $.ajax({
 //        url : url,
 //        data : data
@@ -51,4 +66,53 @@ function changeProduct(id, attr, val) {
 //            alert(res);
 //        });
 
+}
+
+
+function enableProduct(id, $el) {
+    var $cur_row = $('#gift_'+id);
+    var data = {
+        'ajax': 'ajax',
+        'id' : id,
+        'status' : 1
+    };
+    var url = '/ajax/product';
+    ajax_shadow();
+    ajax_get_data(
+        url,
+        data,
+        function() {
+            $cur_row.removeClass('disabled-product');
+            $el.addClass('hidden');
+            $('button.gift-disable', $cur_row).removeClass('hidden');
+            ajax_remove_shadow();
+        },
+        function() {
+            ajax_remove_shadow();
+        }
+    );
+}
+
+function disableProduct(id, $el) {
+    var $cur_row = $('#gift_'+id);
+    var data = {
+        'ajax': 'ajax',
+        'id' : id,
+        'status' : 0
+    };
+    var url = '/ajax/product';
+    ajax_shadow();
+    ajax_get_data(
+        url,
+        data,
+        function() {
+            $cur_row.addClass('disabled-product');
+            $el.addClass('hidden');
+            $('button.gift-enable', $cur_row).removeClass('hidden');
+            ajax_remove_shadow();
+        },
+        function() {
+            ajax_remove_shadow();
+        }
+    );
 }

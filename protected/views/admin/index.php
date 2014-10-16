@@ -36,16 +36,16 @@ $this->breadcrumbs=array(
         <th>
           <?php echo Yii::t('general', 'URL'); ?>
         </th>
-<!--        <th>-->
-<!--          --><?php //echo Yii::t('general', 'Actions'); ?>
-<!--        </th>-->
+        <th>
+          <?php echo Yii::t('general', 'Actions'); ?>
+        </th>
     </tr>
     </thead>
     <tbody>
     <?php
     foreach($products as $p) {
         ?>
-        <tr id="gift_<?php echo $p->product_id;?>" class="gift_tr" data-id="<?php echo $p->product_id;?>">
+        <tr id="gift_<?php echo $p->product_id;?>" class="gift_tr <?php if(!$p->isEnabled()) echo 'disabled-product';?>" data-id="<?php echo $p->product_id;?>">
             <td class="gift_id">
               <?php echo $p->product_id; ?>
             </td>
@@ -70,14 +70,14 @@ $this->breadcrumbs=array(
                        data-initial="<?php echo $p->url;?>"
                     >
             </td>
-<!--            <td class="gift_actions">-->
-<!--                <button type="button" class="gift-disable --><?php //if(!$p->isEnabled()) echo 'hidden';?><!--">-->
-<!--                  --><?php //echo Yii::t('general', 'Delete'); ?>
-<!--                </button>-->
-<!--                <button type="button" class="gift-enable --><?php //if($p->isEnabled()) echo 'hidden';?><!--">-->
-<!--                  --><?php //echo Yii::t('general', 'Return'); ?>
-<!--                </button>-->
-<!--            </td>-->
+            <td class="gift_actions">
+                <button type="button" data-action="disable" class="gift-disable <?php if(!$p->isEnabled()) echo 'hidden';?>">
+                  <?php echo Yii::t('general', 'Delete'); ?>
+                </button>
+                <button type="button" data-action="enable" class="gift-enable <?php if($p->isEnabled()) echo 'hidden';?>">
+                  <?php echo Yii::t('general', 'Return'); ?>
+                </button>
+            </td>
         </tr>
 
     <?php } ?>

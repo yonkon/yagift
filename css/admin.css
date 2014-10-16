@@ -7,3 +7,8 @@
 .highlight.error {
     box-shadow: rgba(170, 5, 5, 0.35) 0px 0px 3px 3px;
 }
+
+.disabled-product *{
+    color: #808080;
+    font-style: italic;
+}
