@@ -26,6 +26,24 @@ $(document).ready(function(){
             }
         });
     });
+
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 600) {
+            $('.scrollup').fadeIn();
+            $('#gift_name_div').fadeOut();
+        } else {
+            $('.scrollup').fadeOut();
+            $('#gift_name_div').fadeIn();
+        }
+    });
+
+    $('.scrollup').click(function () {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 100);
+        return false;
+    });
+
 });
 
 function changeProduct(id, attr, val) {
@@ -115,4 +133,14 @@ function disableProduct(id, $el) {
             ajax_remove_shadow();
         }
     );
+}
+
+function setPageSize(size) {
+    size = parseInt(size);
+    if(!size) size = 100;
+    var input = $('input[name=pageSize]').val(size);
+    var form = input.closest('form');
+    if(form.length) {
+        form.submit();
+    }
 }

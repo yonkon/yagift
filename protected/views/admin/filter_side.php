@@ -260,6 +260,34 @@ $pps = ProductParams::model()->findAll();
         </div>
     </div>
 </div>
+<div class="clr">&nbsp;</div>
+<div class="padding-v-05">
+    <div class="block">
+        <label class="w30 inline-block" for="has_url_any"><?php echo Yii::t('admin', 'Has or has no URL');?></label>
+        <input id="has_url_any" type="radio" name="has_url" value="any"
+            <?php if(!empty($_REQUEST['has_url']) && $_REQUEST['has_url'] == 'any') {
+                echo 'checked="checked "';
+            }?>
+            >
+    </div>
+    <div class="block">
+        <label class="w30 inline-block" for="has_url_true"><?php echo Yii::t('admin', 'Has URL');?></label>
+        <input id="has_url_true" type="radio" name="has_url" value="true"
+            <?php if(!empty($_REQUEST['has_url']) && $_REQUEST['has_url'] == 'true') {
+                echo 'checked="checked "';
+            }?>
+            >
+    </div>
+    <div class="block">
+        <label class="w30 inline-block" for="has_url_false"><?php echo Yii::t('admin', 'Has no URL');?></label>
+        <input id="has_url_false" type="radio" name="has_url" value="false"
+            <?php if(!empty($_REQUEST['has_url']) && $_REQUEST['has_url'] == 'false') {
+                echo 'checked="checked "';
+            }?>
+            >
+    </div>
+</div>
+
     <?php
 //        echo ProductParams::getFiltersHTML();
         ?>

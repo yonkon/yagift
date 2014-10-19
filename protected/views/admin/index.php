@@ -11,10 +11,27 @@ $this->breadcrumbs=array(
 
 <div class="pagination">
     <?php
+    /**
+     * @var $pages CPagination
+     */
     // рисуем пейджер
     $this->widget('CLinkPager', array(
         'pages' => $pages,
     ));
+    $ps20_class = $ps50_class = $ps100_class = 'pageSize-button ';
+    $ps20_class     .= $pages->pageSize == 20   ? 'active' : '';
+    $ps50_class     .= $pages->pageSize == 50   ? 'active' : '';
+    $ps100_class    .= $pages->pageSize == 100  ? 'active' : '';
+    $pageSizeLabel = Yii::t('general', 'Items per page');
+    echo "<div class='padding-v-05'>
+    <form>
+    <span>{$pageSizeLabel}</span>
+    <input type='hidden' name='pageSize' value='{$pages->pageSize}'>
+    <button class='{$ps20_class}' onclick='setPageSize(20);'>20</button>
+    <button class='{$ps50_class}' onclick='setPageSize(50);'>50</button>
+    <button class='{$ps100_class}' onclick='setPageSize(100);'>100</button>
+    </form>
+    </div>";
     ?>
 </div>
 <div class="clr padding-v-05">&nbsp;</div>
@@ -95,3 +112,15 @@ $this->breadcrumbs=array(
     ));
     ?>
 </div>
+<a href="#" class="scrollup">Вверх</a>
+
+<form id="gift_name_form">
+    <div id="gift_name_div">
+        <input id="gift_name_input" class="w60" type="search" name="name"
+               value="<?php echo !empty($_REQUEST['name'])? $_REQUEST['name']: ''?>"
+               placeholder="<?php echo Yii::t('admin', 'Search by product name');?>"
+            >
+        <input id="gift_name_submit" class="w35" type="submit" value="<?php echo Yii::t('general', 'Search');?>">
+<!--        <label for="gift_name_submit"> --><?php //echo Yii::t('general', 'Search');?><!--</label>-->
+    </div>
+</form>

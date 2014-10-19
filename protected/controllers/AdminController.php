@@ -30,11 +30,26 @@ class AdminController extends Controller
             $pmax = preg_replace('/[^\d]/', '', $_REQUEST['PriceMax']);
             $criteria->addCondition('price <= ' . $pmax );
         }
+        if(!empty($_REQUEST['name']) ) {
+            $criteria->addCondition('name LIKE "%' . $_REQUEST['name'] . '%"');
+        }
+        if(!empty($_REQUEST['has_url']) ) {
+            if($_REQUEST['has_url']=='true') {
+                $criteria->addCondition('url != ""');
+            } elseif($_REQUEST['has_url']=='false') {
+                $criteria->addCondition('url = ""');
+            }
+        }
+        if(!empty($_REQUEST['pageSize']) ) {
+            $pageSize = $_REQUEST['pageSize'];
+        } else {
+            $pageSize = 100;
+        }
         $criteria->order = 'url ASC, ListNumber ASC';
         $count=Product::model()->count($criteria);
         $pages=new CPagination($count);
 // элементов на страницу
-        $pages->pageSize=20;
+        $pages->pageSize=$pageSize;
         $pages->applyLimit($criteria);
         $products = Product::model()->findAll($criteria);
         // renders the view file 'protected/views/site/index.php'

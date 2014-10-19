@@ -92,7 +92,7 @@ $(document).ready(function() {
                 var $point = $('.irs-slider.single', obj.slider);
                 var $prepoint = $('.prepoint', obj.slider);
                 var difX = obj.fromX;
-                $point.prop('style', "left: "+difX+"px; background-position: 0px -56px; ");
+                $point.prop('style', "left: "+difX+"px;  ");
                 var prepoint_style = 'width: ' + (difX+2)+ 'px; left: 0px; background: url("/js/ion.RangeSlider/img/sprite-skin-simple.png") repeat-x scroll 0px -4px transparent;             display: block; background-position: 0px -56px; position: absolute;';
                 $prepoint.prop('style', prepoint_style );
             },
@@ -100,7 +100,7 @@ $(document).ready(function() {
                 var $point = $('.irs-slider.single', obj.slider);
                 var $prepoint = $('.prepoint', obj.slider);
                 var difX = obj.fromX;
-                $point.prop('style', "left: "+difX+"px; background-position: 0px -56px; ");
+                $point.prop('style', "left: "+difX+"px;  ");
                 var prepoint_style = 'width: ' + (difX+2)+ 'px; left: 0px; background: url("/js/ion.RangeSlider/img/sprite-skin-simple.png") repeat-x scroll 0px -4px transparent;             display: block; background-position: 0px -56px;';
                 $prepoint.prop('style', prepoint_style );
 
