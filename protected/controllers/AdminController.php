@@ -57,6 +57,10 @@ class AdminController extends Controller
         $this->render('index', array('pages' => $pages, 'products' => $products));
 	}
 
+    public function actionSeo(){
+        $ProductParamsComposition = ProductParamsComposition::model()->findAll();
+        $this->render('seo', array('ProductParamsComposition' => $ProductParamsComposition));
+    }
 	// Uncomment the following methods and override them if needed
 	/*
 	public function filters()

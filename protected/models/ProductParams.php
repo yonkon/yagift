@@ -137,6 +137,9 @@ class ProductParams extends CActiveRecord
            if(empty($g_data['type'])) {
                unset($groups[$g_name]);
            }
+         if($g_name != 'category' && isset($groups[$g_name]['elements']) ) {
+           $groups[$g_name]['elements'] = array_reverse($groups[$g_name]['elements']);
+         }
        }
         return $groups;
     }

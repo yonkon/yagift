@@ -96,5 +96,30 @@ class Helpers {
         return substr($s, 0, -2);
     }
 
+  public static function filters2title($filters) {
+    $result = Yii::t('seo', 'gifts');
+    $parts = array('day' => '', 'for' => '', 'button' => '', 'age' => '');
+    foreach($filters as $filter) {
+      $param_name = $filter['param']->param_name;
+      $param_type = $filter['param']->param_type;
+      $param_description = $filter['param']->param_description;
+      $param_value = $filter['value'];
+      if(in_array($param_type, Helpers::$filtersInTitle)) {
+        $parts[$param_type] = $param_description;
+      }
+    }
+    $result .=  empty($parts['day']) ? '' : ' ' . Yii::t('seo', $parts['day']);
+    if(!empty ($parts['button']) ) {
+      $parts['for'] .= ' ' . $parts['button'];
+    }
+    $parts['for'] = trim($parts['for']);
+    $result .=  empty($parts['for']) ? '' : ' ' . Yii::t('seo', $parts['for']);
+    $result .=  empty($parts['age']) ? '' : ' ' . Yii::t('seo', $parts['age']);
+    return $result;
+  }
+
+  public static $filtersInTitle = array(
+    'day', 'button', 'for', 'age'
+  );
 
 } 

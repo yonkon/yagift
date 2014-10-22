@@ -43,13 +43,13 @@ $pps = ProductParams::model()->findAll();
             <?php if(!empty($_REQUEST['gender']) ) echo 'value="'.$_REQUEST['gender'].'" '?>>
         <div>
             <button
-                class="gender-button<?php if(!empty($_REQUEST['gender']) && $_REQUEST['gender'] == 'ForMan') echo ' active '?>"
+                class="gender-button ForMan <?php if(!empty($_REQUEST['gender']) && $_REQUEST['gender'] == 'ForMan') echo ' active '?>"
                 type="button"
                 name="gender[ForMan]">
                 <?php echo Yii::t('filter', 'For man'); ?>
             </button>
             <button
-                class="gender-button<?php if(!empty($_REQUEST['gender']) && $_REQUEST['gender'] == 'ForWoman') echo ' active '?>"
+                class="gender-button ForWoman <?php if(!empty($_REQUEST['gender']) && $_REQUEST['gender'] == 'ForWoman') echo ' active '?>"
                 type="button"
                 name="gender[ForWoman]">
                 <?php echo Yii::t('filter', 'For woman'); ?>
@@ -299,3 +299,23 @@ $pps = ProductParams::model()->findAll();
         </div>
     </div>
 </form>
+<script type="text/javascript">
+  <?php echo Yii::t('filter', 'js_lang_for' ); ?>
+  $('.gender-button').click(function(){
+    var $this = $(this);
+    var gender = '';
+    if($this.hasClass('ForMan')) {
+      gender = 'man';
+    } else {
+      gender = 'woman';
+    }
+    var labels = lang_for[gender];
+    for(l in labels) {
+      if(labels.hasOwnProperty(l)) {
+        var labelSeector = 'label[for="for[' + l + ']"]';
+        var $label = $(labelSeector);
+        $label.text(labels[l]);
+      }
+    }
+  });
+</script>

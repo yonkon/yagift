@@ -5,7 +5,7 @@
  * @var CPagination $pages
  */
 
-$this->pageTitle=Yii::app()->name;
+//$this->pageTitle=Yii::app()->name;
 ?>
 <div class="w60 float-l">
     <?php

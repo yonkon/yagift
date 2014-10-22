@@ -20,6 +20,23 @@ return array(
     'For child' => 'Ребёнку',
     'For boss' => 'Начальнику',
     'For lover' => 'Любимому/Любимой',
+  'For boss For man'      => 'для начальника',
+  'For boss For woman'    => 'для начальницы',
+  'For child For man'     => 'для мальчика',
+  'For child For woman'   => 'для девочки',
+  'For colleague For man' => 'для сотрудника',
+  'For colleague For woman' => 'для сотрудницы',
+  'For friend For man'    => 'для друга',
+  'For friend For woman'  => 'для подруги',
+  'For grandparent For man' => 'для дедушки',
+  'For grandparent For woman' => 'для бабушки',
+  'For lover For man'     => 'для любимого',
+  'For lover For woman'   => 'для любимой',
+  'For yourself For man'  => 'для себя',
+  'For yourself For woman' => 'для себя',
+  'For parent For man'    => 'для папы',
+  'For parent For woman'  => 'для мамы',
+
     'Age group' => 'Возраст',
     'No importance' => 'Неважно',
     'Price' => 'Цена',
@@ -50,4 +67,29 @@ return array(
     'Tasty' => 'Вкусный',
     'Music' => 'Музыкальный',
     'submit' => 'Подобрать',
+  'js_lang_for' => <<<EOF
+var lang_for = {
+  woman : {
+    ForLover : 'для любимой',
+    ForBoss : 'для начальника',
+    ForChild : 'для девочки',
+    ForGrandparent : 'для бабушки',
+    ForColleague : 'для сотрудницы',
+    ForFriend : 'для подруги',
+    ForParent : 'для мамы',
+    ForOneSef : 'для себя',
+  },
+  man : {
+    ForLover : 'для любимого',
+    ForBoss : 'для начальника',
+    ForChild : 'для мальчика',
+    ForGrandparent : 'для дедушки',
+    ForColleague : 'для сотрудника',
+    ForFriend : 'для друга',
+    ForParent : 'для папы',
+    ForOneSef : 'для себя',
+  }
+};
+
+EOF
 );
