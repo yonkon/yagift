@@ -136,6 +136,7 @@ class SiteController extends Controller
 
   public function actionImage_rewrite($id = null)
   {
+    return false;
     if (empty ($id)) {
       $products = Product::model()->findAllBySql('SELECT * from ' . Product::tableName() . ' WHERE image NOT LIKE "%' . Yii::app()->createAbsoluteUrl(Yii::app()->getHomeUrl()) . '%" ');
       /**

@@ -1,5 +1,6 @@
 <?php
 /**
+ * @var $this SiteController
  * @var $products Product[]
  * @var $pages CPagination
  */

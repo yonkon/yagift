@@ -99,6 +99,7 @@ class Helpers {
   public static function filters2title($filters) {
     $result = Yii::t('seo', 'gifts');
     $parts = array('day' => '', 'for' => '', 'button' => '', 'age' => '');
+    $parts_translated = array();
     foreach($filters as $filter) {
       $param_name = $filter['param']->param_name;
       $param_type = $filter['param']->param_type;
@@ -108,14 +109,23 @@ class Helpers {
         $parts[$param_type] = $param_description;
       }
     }
-    $result .=  empty($parts['day']) ? '' : ' ' . Yii::t('seo', $parts['day']);
+    $parts['day'] =  empty($parts['day']) ? '' :  Yii::t('seo', $parts['day']);
     if(!empty ($parts['button']) ) {
       $parts['for'] .= ' ' . $parts['button'];
     }
     $parts['for'] = trim($parts['for']);
-    $result .=  empty($parts['for']) ? '' : ' ' . Yii::t('seo', $parts['for']);
-    $result .=  empty($parts['age']) ? '' : ' ' . Yii::t('seo', $parts['age']);
-    return $result;
+    $parts['for'] =  empty($parts['for']) ? '' :  Yii::t('seo', $parts['for']);
+    $parts['age'] =  empty($parts['age']) ? '' :  Yii::t('seo', $parts['age']);
+    if (!empty($parts['day']) ) {
+      $parts_translated[] = $parts['day'];
+    }
+    if (!empty($parts['for']) ) {
+      $parts_translated[] = $parts['for'];
+    }
+    if (!empty($parts['age']) ) {
+      $parts_translated[] = $parts['age'];
+    }
+    return $result . ' ' . join(': ', $parts_translated);
   }
 
   public static $filtersInTitle = array(

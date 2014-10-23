@@ -286,6 +286,7 @@ class ProductValues extends CActiveRecord
         }
         $result_ids = join(', ', $temp_pids);
         $criteria->condition = " product_id IN ($result_ids) ";
+      $criteria->addCondition(' status = 1 ');
         return $criteria;
     }
 }
