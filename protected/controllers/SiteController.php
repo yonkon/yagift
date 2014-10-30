@@ -2,6 +2,7 @@
 
 class SiteController extends Controller
 {
+  public $defaultAction = 'list';
   /**
    * Declares class-based actions.
    */
@@ -136,9 +137,10 @@ class SiteController extends Controller
 
   public function actionImage_rewrite($id = null)
   {
-    return false;
+//    return false;
     if (empty ($id)) {
-      $products = Product::model()->findAllBySql('SELECT * from ' . Product::tableName() . ' WHERE image NOT LIKE "%' . Yii::app()->createAbsoluteUrl(Yii::app()->getHomeUrl()) . '%" ');
+      $products = Product::model()->findAll();
+//      $products = Product::model()->findAllBySql('SELECT * from ' . Product::tableName() . ' WHERE image NOT LIKE "%' . Yii::app()->createAbsoluteUrl(Yii::app()->getHomeUrl()) . '%" ');
       /**
        * @var $product Product
        */

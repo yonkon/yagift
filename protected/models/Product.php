@@ -209,15 +209,23 @@ class Product extends CActiveRecord
     }
 
     public function hasLocalImage() {
-        return (strpos($this->image, Yii::app()->createAbsoluteUrl(Yii::app()->getHomeUrl()) )  !== false);
+//        return (strpos($this->image, Yii::app()->createAbsoluteUrl(Yii::app()->getHomeUrl()) )  !== false)  ;
+        return (strpos($this->image, 'http') === false ) ;
     }
 
     public function makeLocalImage() {
+      $baseUrl = Yii::app()->createAbsoluteUrl(Yii::app()->getHomeUrl());
+        if (strpos($this->image, $baseUrl )  !== false) {
+          $this->image = str_replace($baseUrl, '', $this->image);
+          $this->save();
+          return $this;
+        }
         $image_url = preg_replace('/size=\d/', 'size=6', $this->image);
         $image_bin = Helpers::getContentUrl($image_url);
         $dirimg = realpath(Yii::app()->basePath . '/../images') . '/' . $this->product_id. '/'; // directory in which the image will be saved
         $filename = preg_replace('/.*path=(.*)&.*/', '$1', $image_url);
-        $image_new_url = Yii::app()->createAbsoluteUrl('images/' . $this->product_id. '/' . $filename);
+//        $image_new_url = Yii::app()->createAbsoluteUrl('images/' . $this->product_id. '/' . $filename);
+        $image_new_url = 'images/' . $this->product_id. '/' . $filename;
         if(!is_dir($dirimg)) {
             mkdir($dirimg);
             chmod($dirimg, 0777);
@@ -243,6 +251,10 @@ class Product extends CActiveRecord
             }
         }
         return preg_replace('/(.*)\.(.*)/', '$1.min.$2', $this->image);
+    }
+
+    public function getImage() {
+      return Yii::app()->createAbsoluteUrl(Yii::app()->getHomeUrl()) . $this->image;
     }
 
     public function isEnabled() {

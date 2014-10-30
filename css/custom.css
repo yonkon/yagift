@@ -279,3 +279,7 @@ input {display: inline-block}
     color: rgb(101, 51, 0);
     content: 'Сохранение...';
 }
+
+#filters .irs-grid-text {
+  color: #333;
+}

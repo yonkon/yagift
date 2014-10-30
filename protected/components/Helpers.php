@@ -116,16 +116,26 @@ class Helpers {
     $parts['for'] = trim($parts['for']);
     $parts['for'] =  empty($parts['for']) ? '' :  Yii::t('seo', $parts['for']);
     $parts['age'] =  empty($parts['age']) ? '' :  Yii::t('seo', $parts['age']);
-    if (!empty($parts['day']) ) {
-      $parts_translated[] = $parts['day'];
+    if (!empty($parts['day']) )  {
+      $parts['day'] = trim($parts['day']);
+      if (!empty($parts['day']) )  {
+        $parts_translated[] = $parts['day'];
+      }
     }
-    if (!empty($parts['for']) ) {
-      $parts_translated[] = $parts['for'];
+    if (!empty($parts['for'])  ) {
+      $parts['for'] = trim($parts['for']);
+      if (!empty($parts['for'])  ) {
+        $parts_translated[] = $parts['for'];
+      }
     }
-    if (!empty($parts['age']) ) {
-      $parts_translated[] = $parts['age'];
+    if (!empty($parts['age'])  ) {
+      $parts['age']= trim($parts['age']);
+      if (!empty($parts['age'])  ) {
+        $parts_translated[] = $parts['age'];
+      }
     }
-    return $result . ' ' . join(': ', $parts_translated);
+    $parts_translated = join(': ', $parts_translated);
+    return $result . ' ' . $parts_translated;
   }
 
   public static $filtersInTitle = array(
