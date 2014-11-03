@@ -270,7 +270,7 @@ $pps = ProductParams::model()->findAll();
 <!--        </div>-->
 <!--    </div>-->
 </div>
-            <div class="clr">&nbsp;</div>
+            <div class="clr padding-v-05">&nbsp;</div>
             <input type="submit" name="submit" value="submit">
         </div>
     </div>

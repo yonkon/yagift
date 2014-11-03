@@ -1,0 +1,5 @@
+פטכüענ בד #ffffe8 , rgb(255, 255, 232)
+h1: #fef0ce, rgb(254, 240, 206)
+found: #ccebf0, rgb(204, 235, 240)
+link: #4191e1
+pagination: #808285, rgb(128, 130, 133)

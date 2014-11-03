@@ -135,11 +135,115 @@ class Helpers {
       }
     }
     $parts_translated = join(': ', $parts_translated);
+    if(empty($parts_translated)) {
+      return false;
+    }
     return $result . ' ' . $parts_translated;
   }
 
   public static $filtersInTitle = array(
     'day', 'button', 'for', 'age'
   );
+
+  public static function getTitleByControlerAction($controller = '', $action = '') {
+    if(empty($controller)) {
+      $controller = Yii::app()->controller->id;
+    }
+    if(empty($action)) {
+      $action = Yii::app()->controller->getAction()->getId();
+    }
+    $title = Helpers::getConfigMetas($controller, $action);
+    $title = $title['title'];
+    return $title;
+  }
+
+  public static function getConfigMetas($controller = '', $action = '') {
+    include(Yii::app()->basePath . '/config/meta.php');
+    if(empty($controller)) {
+      $controller = Yii::app()->controller->id;
+    }
+    if(empty($action)) {
+      $action = Yii::app()->controller->getAction()->getId();
+    }
+    if (!empty ($configMetas[$controller][$action]) ) {
+      return $configMetas[$controller][$action];
+    }
+    return array(
+      'title'=>'',
+      'description'=>'',
+      'keywords'=>'',
+      'h1'=>'',
+    );
+  }
+
+  public static function useConfigMetas($controller = '', $action = '') {
+    $configMetas = Helpers::getConfigMetas($controller, $action);
+    if (!empty($configMetas['title'])) {
+      Yii::app()->controller->pageTitle = $configMetas['title'];
+    }
+    if (!empty($configMetas['keywords'])) {
+      Yii::app()->clientScript->registerMetaTag($configMetas['keywords'], 'keywords', null, array());
+    }
+    if (!empty($configMetas['description'])) {
+      Yii::app()->clientScript->registerMetaTag($configMetas['description'], 'description', null, array());
+    }
+    return $configMetas;
+  }
+
+  public static function getAnalytics() {
+    $Yandex_Metrika_counter = <<<EOF
+    </script>
+    <!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+      (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+          try {
+            w.yaCounter26806875 = new Ya.Metrika({id:26806875,
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+        } catch(e) { }
+        });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/26806875" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+EOF;
+    $Google_Analytics = <<<EOF
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-56122742-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<script>
+EOF;
+    return $Yandex_Metrika_counter.$Google_Analytics;
+  }
+  public static function registerAnalytics() {
+    $app = Yii::app();
+    /**
+     * @var $app CWebApplication
+     */
+    $analytics = Helpers::getAnalytics();
+    $app->clientScript->registerScript('analytics', $analytics, CClientScript::POS_END );
+
+  }
 
 } 

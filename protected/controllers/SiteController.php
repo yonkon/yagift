@@ -37,7 +37,18 @@ class SiteController extends Controller
   {
     $processedFilter = ProductValues::processFilter($_REQUEST);
     $title = Helpers::filters2title($processedFilter);
+    $configMetas = Helpers::getConfigMetas('site', 'list');
+    if(!$title && !empty($configMetas['title'])) {
+      $title = $configMetas['title'];
+    } else {
+      $configMetas['title'] = $title;
+    }
     $this->pageTitle = $title;
+// # keywords & description
+  Yii::app()->clientScript->registerMetaTag($configMetas['keywords'], 'keywords', null, array());
+  Yii::app()->clientScript->registerMetaTag($configMetas['description'], 'description', null, array());
+
+    //TODO add meta description && keywords, make different h1 && title in views
     $criteria = ProductValues::getFilterCriteria($processedFilter);
     if (!empty($_REQUEST['PriceMin'])) {
       $pmin = preg_replace('/[^\d]/', '', $_REQUEST['PriceMin']);
@@ -57,6 +68,8 @@ class SiteController extends Controller
     $products = Product::model()->findAll($criteria);
     // renders the view file 'protected/views/site/index.php'
     // using the default layout 'protected/views/layouts/main.php'
+    Helpers::registerAnalytics();
+
     $this->render('list', array('pages' => $pages, 'products' => $products));
   }
 
@@ -137,7 +150,7 @@ class SiteController extends Controller
 
   public function actionImage_rewrite($id = null)
   {
-//    return false;
+    return false;
     if (empty ($id)) {
       $products = Product::model()->findAll();
 //      $products = Product::model()->findAllBySql('SELECT * from ' . Product::tableName() . ' WHERE image NOT LIKE "%' . Yii::app()->createAbsoluteUrl(Yii::app()->getHomeUrl()) . '%" ');

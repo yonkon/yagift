@@ -24,6 +24,10 @@
 <div id="page">
 
 	<div id="header">
+    <a href="<?php echo Yii::app()->createAbsoluteUrl(Yii::app()->request->baseUrl);?>"><img id="main_logo" src="/css/logo.png"></a>
+    <div class="float-r" style="width: 41%;">
+      <span class="filter-header">СЕРВИС ВЫБОРА ПОДАРКОВ</span>
+    </div>
 	<!--	<div class="span-10" id="logo"><?php /*echo CHtml::encode(Yii::app()->name); */?></div>
         <div class="span-10" id="search">
             <form action="<?php /*echo (Yii::app()->createUrl('product/search')); */?>">
@@ -52,9 +56,26 @@
 
 	<?php echo $content; ?>
 
-	<div class="clear"></div>
-
+	<div class="clr padding-v-2"></div>
 	<div id="footer">
+    <div class="footer-links">
+      <a
+        href="<?php echo Yii::app()->createAbsoluteUrl('/');?>">
+        <?php echo Yii::t('footer','Main page');?>
+      </a>
+      <a
+        href="<?php echo Yii::app()->createUrl('pages/help');?>">
+        <?php echo Yii::t('footer','Site help');?>
+      </a>
+      <a
+        href="<?php echo Yii::app()->createUrl('pages/payment');?>">
+        <?php echo Yii::t('footer','Payment/Shipping');?>
+      </a>
+      <a
+        href="<?php echo Yii::app()->createUrl('pages/contacts');?>">
+        <?php echo Yii::t('footer','Contacts');?>
+      </a>
+    </div>
 	</div><!-- footer -->
 
 </div><!-- page -->

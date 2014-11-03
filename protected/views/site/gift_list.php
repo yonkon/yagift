@@ -5,10 +5,11 @@
  * @var $pages CPagination
  */
 ?>
-<h1>
+<h1 class="h1-highlight">
   <?php echo $this->pageTitle;?>
 </h1>
-<div>
+<div class="clr">&nbsp;</div>
+<div class="item-count-highlight">
   <?php echo (Yii::t('product', '{n} variants found, showing {first} to {last}', array('{n}' => $pages->itemCount, '{first}' => $pages->offset, '{last}' => $pages->offset + count($products) ) ) ); ?>
 </div>
  <div class="gift-list">
