@@ -271,7 +271,9 @@ $pps = ProductParams::model()->findAll();
 <!--    </div>-->
 </div>
             <div class="clr padding-v-05">&nbsp;</div>
-            <input type="submit" name="submit" value="submit">
+            <input type="submit" name="submit"
+                   value="<?php echo Yii::t('filter', 'submit')?>"
+              >
         </div>
     </div>
 </form>

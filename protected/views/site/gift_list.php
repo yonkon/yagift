@@ -3,10 +3,11 @@
  * @var $this SiteController
  * @var $products Product[]
  * @var $pages CPagination
+ * @var $meta array
  */
 ?>
 <h1 class="h1-highlight">
-  <?php echo $this->pageTitle;?>
+  <?php echo empty($meta['h1']) ? $this->pageTitle : $meta['h1'];?>
 </h1>
 <div class="clr">&nbsp;</div>
 <div class="item-count-highlight">

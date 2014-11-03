@@ -22,10 +22,15 @@ class PagesController extends Controller
 		$this->render('payment');
 	}
 
-  public function beforeAction() {
+  public function beforeAction($action) {
     Helpers::registerAnalytics();
     Helpers::useConfigMetas();
-    return 1;
+    return parent::beforeAction($action);
+  }
+
+  public function beforeRender($view, &$data = null) {
+    $data['meta'] = Helpers::getConfigMetas();
+    return parent::beforeRender($view, $data);
   }
 	// Uncomment the following methods and override them if needed
 	/*

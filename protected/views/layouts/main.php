@@ -5,6 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="en" />
 
+  <link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/favicon.ico" type="image/x-icon" />
 	<!-- blueprint CSS framework -->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
@@ -16,6 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/custom.css" />
 
+
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
@@ -25,8 +27,10 @@
 
 	<div id="header">
     <a href="<?php echo Yii::app()->createAbsoluteUrl(Yii::app()->request->baseUrl);?>"><img id="main_logo" src="/css/logo.png"></a>
-    <div class="float-r" style="width: 41%;">
-      <span class="filter-header">СЕРВИС ВЫБОРА ПОДАРКОВ</span>
+    <div class="filter-header" >
+<!--    <div class="float-r" style="width: 41%;">-->
+      <span >СЕРВИС ВЫБОРА ПОДАРКОВ</span>
+<!--      <span class="filter-header">СЕРВИС ВЫБОРА ПОДАРКОВ</span>-->
     </div>
 	<!--	<div class="span-10" id="logo"><?php /*echo CHtml::encode(Yii::app()->name); */?></div>
         <div class="span-10" id="search">
