@@ -46,6 +46,7 @@ class SiteController extends Controller
     }
     $this->pageTitle = $title;
     $criteria = ProductValues::getFilterCriteria($processedFilter);
+    $criteria->addCondition('status = 1');
     if (!empty($_REQUEST['PriceMin'])) {
       $pmin = preg_replace('/[^\d]/', '', $_REQUEST['PriceMin']);
       $criteria->addCondition('price >= ' . $pmin);

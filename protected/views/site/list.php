@@ -12,7 +12,7 @@
     $this->renderPartial('gift_list', array('products' => $products, 'pages' => $pages));
     ?>
 </div>
-<div class="w30 float-l" style="margin-left: 5%; margin-top: 5%">
+<div class="w30 float-l filter-side" >
     <?php
     $this->renderPartial('filter_side');
     ?>

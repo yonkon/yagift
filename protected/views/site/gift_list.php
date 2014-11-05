@@ -33,11 +33,11 @@
 
 <?php } ?>
 </div>
-<div class="clr">&nbsp;</div>
+<div class="clr padding-v-1">&nbsp;</div>
 <div class="pagination">
 <?php
 // рисуем пейджер
-$this->widget('CLinkPager', array(
+$this->widget('giftokPager', array(
     'pages' => $pages,
 ));
 ?>

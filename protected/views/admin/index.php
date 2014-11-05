@@ -15,7 +15,7 @@ $this->breadcrumbs=array(
      * @var $pages CPagination
      */
     // рисуем пейджер
-    $this->widget('CLinkPager', array(
+    $this->widget('giftokPager', array(
         'pages' => $pages,
     ));
     $ps20_class = $ps50_class = $ps100_class = 'pageSize-button ';
@@ -107,7 +107,7 @@ $this->breadcrumbs=array(
 <div class="pagination">
     <?php
     // рисуем пейджер
-    $this->widget('CLinkPager', array(
+    $this->widget('giftokPager', array(
         'pages' => $pages,
     ));
     ?>

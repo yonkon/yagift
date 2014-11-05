@@ -26,7 +26,7 @@
 <div id="page">
 
 	<div id="header">
-    <a href="<?php echo Yii::app()->createAbsoluteUrl(Yii::app()->request->baseUrl);?>"><img id="main_logo" src="/css/logo.png"></a>
+    <a class="w65 float-l" href="<?php echo Yii::app()->createAbsoluteUrl(Yii::app()->request->baseUrl);?>"><img id="main_logo" src="/css/logo.png"></a>
     <div class="filter-header" >
 <!--    <div class="float-r" style="width: 41%;">-->
       <span >СЕРВИС ВЫБОРА ПОДАРКОВ</span>

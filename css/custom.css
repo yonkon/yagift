@@ -1,20 +1,20 @@
 html {
-    background: white;
+  background: white;
 }
 
 table, th, td {
-    border: 1px ridge #eaeaea;
+  border: 1px ridge #eaeaea;
 }
 
 tr:nth-of-type(odd) {
-    background-color: #FAFAFA;
+  background-color: #FAFAFA;
 }
 tr:nth-of-type(even) {
-    background-color: #FFFFFF;
+  background-color: #FFFFFF;
 }
 
 tr:hover {
-    background-color: #F0F4FF;
+  background-color: #F0F4FF;
 }
 
 input {display: inline-block}
@@ -63,41 +63,42 @@ input {display: inline-block}
 
 /*////////////IDS////////////////*/
 #filters, #filters_side {
-    border: 1px solid #2080D0;
-    border-radius: 8px;
-    background: none repeat scroll 0% 0% #ffffe8;
-    max-width: 670px;
-    min-width: 335px;
+  border: 1px solid #2080D0;
+  border-radius: 8px;
+  background: none repeat scroll 0% 0% #ffffe8;
+  width: 350px;
+  /*max-width: 670px;*/
+  /*min-width: 350px;*/
 }
 
 #filters.double {
-    min-width: 650px;
+  min-width: 650px;
 }
 
 #filters label {
-    font-weight: bold;
+font-weight: bold;
 }
 
-#filters .two-column-filter label, .irs-margin-top label {
-    font-weight: normal;
+#filters .two-column-filter label, #filters .irs-margin-top label {
+  font-weight: normal;
 }
 
 .irs-margin-top>div {
-    padding-bottom: 2em;
+  padding-bottom: 2em;
 }
 
 #filter-content {
-    padding: 16px 12px 26px 12px;
+  padding: 16px 12px 26px 12px;
 }
 
 .filter-group > * {
-    width: 50%;
-    display: inline-block;
+  width: 50%;
+  display: inline-block;
 }
 
 .filter-group label {
-    width: 35%;
-    margin: 0 2%;
+  width: 35%;
+  margin: 0 2%;
 }
 #main_logo {
   /*margin-top: 18px;*/
@@ -105,19 +106,34 @@ input {display: inline-block}
 }
 
 .filter-header {
-  width: 30%;
-  position: absolute;
-  top: 50px;
-  left: 67.5%;
+  width: 350px;
+  margin-top: 50px;
+  float: left;
+  margin-left: 5%;
+  /*position: absolute;*/
+  /*top: 50px;*/
+  /*left: 65.5%;*/
 }
+
+
+@media(max-width: 1240px) {
+  .filter-header {
+    margin-left: 2%;
+  }
+}
+@media(max-width: 980px) {
+  .filter-header {
+    margin-left: 0;
+  }
+}
+
 .filter-header span {
   font-family: Verdana,Helvetica,sans-serif;
-  font-size: 18pt;
+  font-size: 17pt;
   display: block;
   text-align: center;
   /*margin-top: 40px;*/
   color: white;
-
 }
 
 @media (max-width: 1180px) {
@@ -128,58 +144,70 @@ input {display: inline-block}
   }
 }
 
+#page {
+  min-width: 1015px;
+}
 #header {
-  background-image: url('./header.png');
-  background-size: 100% 100%;
+  background-image: url('./header2000.png');
+  /*background-size: 100% 100%;*/
   height: 102px;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 #footer
 {
-  background-image: url('./footer.png');
+  background-image: url('./footer2000.png');
   height: 40px;
   padding: 0px;
   margin: 0px;
-  background-size: 100% 100%;
-  position: fixed;
+  /*background-size: 100% 100%;*/
+  position: relative;
+  /*position: fixed;*/
   width: 100%;
   bottom: 0px;
   z-index: 2;
 }
 
 .pagination ul.yiiPager a, .pagination ul.yiiPager a:link, .pagination ul.yiiPager a:visited {
-  color: #808285;
+  /*color: #808285;*/
+  color: #444;
   border: none;
   text-decoration: underline;
-  font-size: 10pt;
+  font-size: 17px;
   padding: 2px 4px;
+  font-weight: normal;
 }
 
 .pagination ul.yiiPager .page  {
-  border-left: 1px solid #888;
-  margin-left: -3px;
+  /*border-left: 1px solid #888;*/
+  /*margin-left: -3px;*/
   /*border-left: none;*/
 }
 
-.pagination ul.yiiPager .selected, .pagination ul.yiiPager .selected a {
+/*.pagination ul.yiiPager .selected, .pagination ul.yiiPager .selected a {
   background: none repeat scroll 0% 0% #888;
   color: #FFF;
   font-weight: bold;
   margin-right: -1px;
   margin-left: -1px;
+}*/
+
+.pagination ul.yiiPager .selected, .pagination ul.yiiPager .selected a {
+  background: none repeat scroll 0% 0% #EEE;
+  color: #333;
+  font-weight: normal;
+  text-decoration: none;
 }
 
-
 .gift_div {
-    width: 20%;
-    padding: 2%;
-    float: left;
-    min-width: 100px;
+  width: 20%;
+  padding: 2%;
+  float: left;
+  min-width: 100px;
 }
 
 .gift_div:nth-of-type(4n+1) {
-    clear: left;
+  clear: left;
 }
 
 .gift_div img {
@@ -187,86 +215,86 @@ input {display: inline-block}
   max-height: 100%;
   margin: 0px auto;
   display: block;
-    /*max-width: 8vw;
-    max-height: 8vw;
-    min-height: 100px;
-    min-width: 100px;
-    margin: 0 auto;*/
-    /*border: 1px solid #f0f0f0;*/
+  /*max-width: 8vw;
+  max-height: 8vw;
+  min-height: 100px;
+  min-width: 100px;
+  margin: 0 auto;*/
+  /*border: 1px solid #f0f0f0;*/
 }
 
 .gift_div .img_box {
-    width: 8vw;
-    height: 8vw;
-    min-height: 100px;
-    min-width: 100px;
+  width: 8vw;
+  height: 8vw;
+  min-height: 100px;
+  min-width: 100px;
 }
 
 .gift_tr .img_box, .gift_tr img {
-    max-height: 50px;
-    max-width: 50px;
-    min-height: 50px;
-    min-width: 50px;
-    height: 50px;
-    width: 50px;
+  max-height: 50px;
+  max-width: 50px;
+  min-height: 50px;
+  min-width: 50px;
+  height: 50px;
+  width: 50px;
 }
 
 .gift_tr img {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 .gift_tr input {
-    width: 95%;
-    padding: 1em 0;
-    font-size: 8pt;
+  width: 95%;
+  padding: 1em 0;
+  font-size: 8pt;
 }
 
 @media(max-width: 860px) {
-    .gift_div {
-        width: 29%;
-        padding: 2%;
-        float: left;
-    }
-    .gift_div:nth-of-type(4n+1) {
-        clear: none;
-    }
-    .gift_div:nth-of-type(3n+1) {
-        clear: left;
-    }
+  .gift_div {
+    width: 29%;
+    padding: 2%;
+    float: left;
+  }
+  .gift_div:nth-of-type(4n+1) {
+    clear: none;
+  }
+  .gift_div:nth-of-type(3n+1) {
+    clear: left;
+  }
 }
 
 @media(max-width: 660px) {
-    .gift_div {
-        width: 46%;
-        padding: 2%;
-        float: left;
-    }
-    .gift_div:nth-of-type(4n+1) {
-        clear: none;
-    }
-    .gift_div:nth-of-type(3n+1) {
-        clear: none;
-    }
-    .gift_div:nth-of-type(2n+1) {
-        clear: left;
-    }
+  .gift_div {
+    width: 46%;
+    padding: 2%;
+    float: left;
+  }
+  .gift_div:nth-of-type(4n+1) {
+    clear: none;
+  }
+  .gift_div:nth-of-type(3n+1) {
+    clear: none;
+  }
+  .gift_div:nth-of-type(2n+1) {
+    clear: left;
+  }
 }
 
 .two-column-filter {
-    width: 100%;
+  width: 100%;
 }
 .two-column-filter div, .two-column-filter label, .two-column-filter input {
-    display: inline-block;
+  display: inline-block;
 }
 .two-column-filter label, .two-column-filter input {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 #filters .two-column-filter label {
-    font-size: 9pt;
+  font-size: 13px;
 }
 
 #filters *, #filters_side * {
-    font-size: 9pt;
+  font-size: 13px;
 }
 
 #filters input[type=checkbox] + label, #filters input[type=radio] + label {
@@ -277,7 +305,7 @@ input {display: inline-block}
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 #filters input[type=checkbox], #filters input[type=radio] {
-    margin-right: -2px;
+  margin-right: -2px;
 }
 
 
@@ -291,77 +319,77 @@ input {display: inline-block}
 .irs-margin-top .irs .irs-line { top: 4px; }
 
 .gender-button {
-    background: none repeat scroll 0% 0% transparent;
-    margin: 0px;
-    padding: 0px;
-    border: none;
-    border-bottom: 1px dashed black;
-    cursor: pointer;
+  background: none repeat scroll 0% 0% transparent;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  border-bottom: 1px dashed black;
+  cursor: pointer;
 }
 
 .gender-button.active {
-    border-bottom: none;
-    background-color: #FD8E19;
-    cursor: default;
+  border-bottom: none;
+  background-color: #FD8E19;
+  cursor: default;
 }
 
 .ion-range-margin-top > span.irs {
-    margin-top: -1em;
+  margin-top: -1em;
 }
 
 .w60 .yiiPager {
-    display: block;
-    margin-top: 1em;
+  display: block;
+  margin-top: 1em;
 }
 @media (max-width: 800px) {
-    .yiiPager .page:nth-of-type(7):after {
-        content: "\0020";
-        display: block;
-        height: 1em;
-    }
+  .yiiPager .page:nth-of-type(7):after {
+    content: "\0020";
+    display: block;
+    height: 1em;
+  }
 }
 @media (max-width: 400px) {
-    .yiiPager .page:nth-of-type(3n+4):after {
-        content: "\0020";
-        display: block;
-        height: 1em;
-    }
+  .yiiPager .page:nth-of-type(3n+4):after {
+    content: "\0020";
+    display: block;
+    height: 1em;
+  }
 }
 
 
 #ajax_shadow {
-    display: block;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.25);
-    z-index: 1001;
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 1001;
 }
 
 #ajax_loader {
-    display: block;
-    position: relative;
-    top: 2em;
-    margin: 0 auto;
-    width: 95pt;
-    height: 22pt;
-    background: rgba(246, 246, 246, 1);
-    border: 2px double rgb(224, 224, 224);
-    border-radius: 10px;
-    z-index: 1002;
+  display: block;
+  position: relative;
+  top: 2em;
+  margin: 0 auto;
+  width: 95pt;
+  height: 22pt;
+  background: rgba(246, 246, 246, 1);
+  border: 2px double rgb(224, 224, 224);
+  border-radius: 10px;
+  z-index: 1002;
 }
 
 #ajax_loader:before {
-    ddisplay: block;
-    width: 100%;
-    text-align: center;
-    font-size: 12pt;
-    line-height: 12pt;
-    padding: 5pt 0 0 0;
-    color: rgb(101, 51, 0);
-    content: 'Сохранение...';
+  ddisplay: block;
+  width: 100%;
+  text-align: center;
+  font-size: 12pt;
+  line-height: 12pt;
+  padding: 5pt 0 0 0;
+  color: rgb(101, 51, 0);
+  content: 'Сохранение...';
 }
 
 #filters .irs-grid-text {
@@ -379,7 +407,7 @@ input {display: inline-block}
   background-color: #ccebf0;
 }
 .footer-links {
-  width: 420px;
+  width: 500px;
   margin: 0 auto;
   padding-top: 1em;
 }
@@ -390,4 +418,31 @@ input {display: inline-block}
   font-size: 10pt;
   font-family: "Avant Garde",Avantgarde,"Century Gothic",CenturyGothic,"AppleGothic",sans-serif;
   padding: 0px 8px;
+}
+
+.filter-side {
+  margin-left: 5%;
+  margin-top: 5%
+}
+
+@media(max-width: 1240px) {
+  .filter-side {
+    margin-left: 2%;
+  }
+}
+@media(max-width: 980px) {
+  .filter-side {
+    margin-left: 0;
+  }
+}
+
+.pager-header {
+  font-size: 17px;
+  font-weight: bold;
+  padding-right: 0.65em;
+}
+
+ul.yiiPager li.previous.hidden a, ul.yiiPager li.next.hidden a{
+  cursor: default;
+  color: #aaa;
 }
