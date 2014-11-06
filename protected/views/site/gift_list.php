@@ -19,7 +19,9 @@
 ?>
     <div id="gift_<?php echo $p->product_id;?>" class="gift_div">
         <div class="img_box">
+          <a href="<?php echo empty($p->url)? '#' : $p->url;?>">
             <img src=<?php echo $p->image;?>>
+          </a>
         </div>
         <p class="gift_name">
             <a href="<?php echo empty($p->url)? '#' : $p->url;?>">
