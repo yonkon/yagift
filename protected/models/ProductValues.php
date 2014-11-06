@@ -241,7 +241,7 @@ class ProductValues extends CActiveRecord
             } else {
                 $sql="SELECT product_id FROM $table WHERE product_params_id = $par_id AND value = '$val' ";
             }
-            if(in_array($field['param']['param_type'] , array('number', 'for', 'gender', 'day', 'age') )) {
+            if(in_array($field['param']['param_type'] , array('number', 'for', 'gender', 'day', 'age', 'button', 'checkbox') )) {
                 $param_combine = 'intersect';
             } else {
                 $param_combine = 'merge';

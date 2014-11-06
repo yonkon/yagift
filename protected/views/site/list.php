@@ -7,7 +7,7 @@
 
 //$this->pageTitle=Yii::app()->name;
 ?>
-<div class="w65 float-l">
+<div class="w65 float-l main-left-part">
     <?php
     $this->renderPartial('gift_list', array('products' => $products, 'pages' => $pages));
     ?>
